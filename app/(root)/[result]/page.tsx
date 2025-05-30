@@ -10,7 +10,7 @@ async function page ({ searchParams }: { searchParams: Promise<{ query?: string 
     const baseAPI=process.env.API_IMAGE_ENDPOINT;
     const aspectRatio=process.env.API_ASPECT;
     const cardjson:CardJson[]=[];
-    const apiUrl=`${baseAPI}?${query}?${aspectRatio}`;
+    const apiUrl=`${baseAPI}?prompt=${(query)}${aspectRatio}`;
     for (let i = 0; i < 3; i++) {
         const randomSeed = Math.random();
         const response = await fetch(`${apiUrl}&seed=${randomSeed}`);
