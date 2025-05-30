@@ -2,8 +2,8 @@
 import Images from "@/components/ui/images";
 import PromptArea from "@/components/ui/promptArea";
 
-export default async function Home({ searchParams }: { searchParams: { query?: string } }) {
-  const query = searchParams.query;
+export default async function Home({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
+  const query =  (await searchParams).query;
 
   
   return (
