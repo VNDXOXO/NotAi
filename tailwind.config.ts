@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		fontFamily:{
+			grotesk:['SempioneGrotesk','sans-serif'],
+		},
 		screens: {
         'phone-sm': '420px',
         'phone': '767px',
