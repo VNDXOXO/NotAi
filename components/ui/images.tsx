@@ -1,11 +1,13 @@
 import React from 'react'
 import { prompts } from '../prompts';
 import { Card,CardHeader,CardContent,CardTitle } from './card';
+import * as motion from "motion/react-client"
+
 type CardJson = {
   title: string;
   image_link: string;
 };
-async function Images(){
+ function Images(){
     const baseAPI=process.env.API_IMAGE_ENDPOINT;
     const aspectRatio=process.env.API_ASPECT;
     const cardjson:CardJson[]=[];
@@ -30,22 +32,33 @@ async function Images(){
     // await genImage();
     
   return (
+     <div className="card-grid mt-7">
+        {cardjson.map((card:{image_link :string; title:string},index) => (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{
+                duration: 0.4,
+                scale: { type: "spring", visualDuration: 0.4, bounce: 0.1 },
+            }}
+            key={index}>
+          <Card className="" >
+            <CardHeader>
+              <CardTitle>{card.title}</CardTitle>
+              {/* <CardDescription>Card Description</CardDescription>  */}
+            </CardHeader>
+            <CardContent>
+              <img src={card.image_link} alt="" className="rounded-lg desktop:w-80"/>
+            </CardContent>
+          </Card>  
+          </motion.div>
+        ))}      
+      
+
     
-    <div className="card-grid mt-7">
-         {cardjson.map((card:{image_link :string; title:string},index) => (
-            <Card className="" key={index}>
-              <CardHeader>
-                <CardTitle>{card.title}</CardTitle>
-                {/* <CardDescription>Card Description</CardDescription>  */}
-              </CardHeader>
-              <CardContent>
-                <img src={card.image_link} alt="" className="rounded-lg desktop:w-80"/>
-              </CardContent>
-            </Card>  
-            // <div key={index}>
-            //   <img src={card.image_link} alt="" className="rounded-lg"/>
-            // </div>
-        ))}       
+          
       </div>
 
   )
