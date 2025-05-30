@@ -6,9 +6,8 @@ type CardJson = {
 };
 
 async function page ({ searchParams }: { searchParams: { query?: string } }){
-    const query = (await searchParams).query;
+    const query = searchParams.query ?? '';
     const baseAPI=process.env.API_IMAGE_ENDPOINT;
-    
     const aspectRatio=process.env.API_ASPECT;
     const cardjson:CardJson[]=[];
     const apiUrl=`${baseAPI}?${query}?${aspectRatio}`;
@@ -26,8 +25,7 @@ async function page ({ searchParams }: { searchParams: { query?: string } }){
   return (
     <div>
         <h1 className='text-2xl tracking-tight'>Generated results for: {query}</h1>
-        <div className="grid sm:grid-cols-1 tablet:grid-cols-1 tablet-lg:grid-cols-3 desktop:grid-cols-3 gap-4 mt-7">
-        
+        <div className="grid sm:grid-cols-1 tablet:grid-cols-1 tablet-lg:grid-cols-3 tablet-lg:px-0 desktop:grid-cols-3 desktop:px-20 gap-5 mt-7">
          {cardjson.map((card:{image_link :string; title:string},index) => (
             <Card key={index}>
               <CardHeader>
