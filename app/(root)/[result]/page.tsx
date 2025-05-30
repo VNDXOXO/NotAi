@@ -5,12 +5,8 @@ type CardJson = {
   image_link: string;
 };
 
-async function page ({
-  searchParams,
-}: {
-  searchParams: { query?: string };
-}){
-    const query =  searchParams?.query;
+async function page ({ searchParams }: { searchParams: Promise<{ query?: string }> }){
+    const query =  (await searchParams).query;
     const baseAPI=process.env.API_IMAGE_ENDPOINT;
     const aspectRatio=process.env.API_ASPECT;
     const cardjson:CardJson[]=[];
