@@ -1,4 +1,8 @@
-export const prompts:any[]=[
+type Prompts={
+    title:string,
+    image_link:string
+}
+export const prompts:Prompts[]=[
     {
         title: 'I was never there',
         image_link: 'https://dbuzz-assets.s3.amazonaws.com/ai_image/public/fl/image-1748462026046.jpeg'

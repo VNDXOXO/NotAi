@@ -1,12 +1,16 @@
 import { Card,CardHeader,CardContent} from '@/components/ui/card'
 import Image from 'next/image';
+type CardJson = {
+  title: string;
+  image_link: string;
+};
 
 async function page ({ searchParams }: { searchParams: { query?: string } }){
     const query = (await searchParams).query;
     const baseAPI=process.env.API_IMAGE_ENDPOINT;
     
     const aspectRatio=process.env.API_ASPECT;
-    let cardjson:any[]=[];
+    const cardjson:CardJson[]=[];
     const apiUrl=`${baseAPI}?${query}?${aspectRatio}`;
     for (let i = 0; i < 3; i++) {
         const randomSeed = Math.random();

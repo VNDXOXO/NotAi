@@ -6,9 +6,9 @@ type CardJson = {
   image_link: string;
 };
 async function Images(){
-    let baseAPI=process.env.API_IMAGE_ENDPOINT;
-    let aspectRatio=process.env.API_ASPECT;
-    let cardjson:CardJson[]=[];
+    const baseAPI=process.env.API_IMAGE_ENDPOINT;
+    const aspectRatio=process.env.API_ASPECT;
+    const cardjson:CardJson[]=[];
     for (let j = 0; j < prompts.length; j++) {
         cardjson.push({
             title:prompts[j].title,
@@ -16,17 +16,17 @@ async function Images(){
         });
         
     }
-    async function genImage(){
-        for (let i = 0; i < prompts.length; i++) {
-            const apiUrl=`${baseAPI}?${prompts[i]}?${aspectRatio}`
-            console.log('fetching from 🔥',apiUrl);
-            const response = await fetch (`${baseAPI}?${prompts[i]}?${aspectRatio}`);
-            const data=await response.json();
-            {console.log('IMGURL',data.image_link)}
-            data.title=prompts[i];
-            cardjson.push(data);
-        }
-    }
+    // async function genImage(){
+    //     for (let i = 0; i < prompts.length; i++) {
+    //         const apiUrl=`${baseAPI}?${prompts[i]}?${aspectRatio}`
+    //         console.log('fetching from 🔥',apiUrl);
+    //         const response = await fetch (`${baseAPI}?${prompts[i]}?${aspectRatio}`);
+    //         const data=await response.json();
+    //         {console.log('IMGURL',data.image_link)}
+    //         data.title=prompts[i];
+    //         cardjson.push(data);
+    //     }
+    // }
     // await genImage();
     
   return (
